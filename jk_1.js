@@ -2,13 +2,13 @@ var cols, rows;
 var scl = 20;
 var w = 1400;
 var h = 1000;
-
-let hi;
+let s;
 var flying = 0;
 
 var terrain = [];
 
 function setup() {
+  s = createSlider(225,110,110);
   createCanvas(600, 600, WEBGL);
   cols = w / scl;
   rows = h / scl;
@@ -22,6 +22,7 @@ function setup() {
 }
 
 function draw() {
+  v = s.value();
   let locX = mouseX - height / 2;
   let locY = mouseY - width / 2;
 
@@ -57,20 +58,17 @@ function draw() {
       vertex(x * scl, (y + 1) * scl, terrain[x][y + 1]);
     }
     endShape();
-    hi = height/2-100;
-    hi++;
     push();
  
-    translate(width / 2, hi);
-    rotateZ(frameCount * 0.01);
+    translate(width / 2, height/2);
     torus(80, 20, 64, 64);
-    sphere(50);
+    sphere(v);
     specularMaterial(250);
     pop();
 
     push();
     translate(width / 2+300, height / 2-100);
-    rotateX(frameCount * 0.01);
+ 
     normalMaterial(255, 0, 0);
     torus(80, 20, 64, 64);
     sphere(50);
@@ -78,8 +76,6 @@ function draw() {
 
     push();
     translate(width / 2+600, height / 2-100);
-    rotateY(frameCount * 0.01);
-
     torus(80, 20, 64, 64);
     sphere(50);
     ambientMaterial(190);
