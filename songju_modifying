@@ -4,6 +4,7 @@ var w = 1400;
 var h = 1000;
 let s;
 
+let hi;
 var flying = 0;
 
 var terrain = [];
@@ -13,7 +14,6 @@ function setup() {
   createCanvas(600, 600, WEBGL);
   cols = w / scl;
   rows = h / scl;
-
   for (var x = 0; x < cols; x++) {
     terrain[x] = [];
     for (var y = 0; y < rows; y++) {
@@ -29,7 +29,7 @@ function draw() {
 
   ambientLight(60, 60, 60);
   pointLight(255, 255, 255, locX, locY, 100);
-
+  spotLight(0, 0, 0, locX, locY, 100 0, 0, -1);     //spotLight 추가(좌측에서 비추는 검은색 빛) 
   flying -= 0.1;
   var yoff = flying;
   for (var y = 0; y < rows; y++) {
@@ -50,24 +50,26 @@ function draw() {
   rotateX(PI / 3);
   fill(200, 200, 200, 150);
   translate(-w / 2, -h / 2);
-
-
   for (var y = 0; y < rows - 1; y++) {
     beginShape(TRIANGLE_STRIP);
     for (var x = 0; x < cols; x++) {
+    fill(64+terrain[x][y], 64-terrain[x][y], 64+terrain[x][y]);   //지형 색깔 바꾸기
       vertex(x * scl, y * scl, terrain[x][y]);
       vertex(x * scl, (y + 1) * scl, terrain[x][y + 1]);
     }
     endShape();
-  
+    hi = height/2-100;
+    hi++;
+
     push();
+
+    translate(width / 2, hi);
     translate(width / 2, v);
     rotateZ(frameCount * 0.01);
     torus(80, 20, 64, 64);
     sphere(50);
     specularMaterial(250);
     pop();
-
     push();
     translate(width / 2+300, height / 2-100);
     rotateX(frameCount * 0.01);
@@ -75,11 +77,9 @@ function draw() {
     torus(80, 20, 64, 64);
     sphere(50);
     pop();
-
     push();
     translate(width / 2+600, height / 2-100);
     rotateY(frameCount * 0.01);
-
     torus(80, 20, 64, 64);
     sphere(50);
     ambientMaterial(190);

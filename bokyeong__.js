@@ -9,7 +9,9 @@ var flying = 0;
 var terrain = [];
 
 function setup() {
-  s = createSlider(0,255,117);
+
+ 
+  s = createSlider(0,255,127);
   createCanvas(600, 600, WEBGL);
   cols = w / scl;
   rows = h / scl;
@@ -22,6 +24,7 @@ function setup() {
   }
 }
 
+
 function draw() {
   let v = s.value();
   let locX = mouseX - height / 2;
@@ -29,6 +32,14 @@ function draw() {
 
   ambientLight(60, 60, 60);
   pointLight(255, 255, 255, locX, locY, 100);
+  
+  shininess(10);  
+  ambientLight(20);
+  specularColor(120, 0, 0);
+  pointLight(255, 0, 0, 0, -50, 50);
+  specularColor(0, 120, 0);
+  pointLight(0, 255, 0, 0, 50, 50);
+  specularMaterial(100);  //specularColor 
 
   flying -= 0.1;
   var yoff = flying;
@@ -45,7 +56,7 @@ function draw() {
   lights();
   var x = map(mouseX, 0, width, -100, 100);
   var y = map(mouseY, 0, height, -100, 100);
-  camera(0, 0, 200, x, y, 0, 0, 1, 0);
+  camera(0, 0, 400, x, y, 0, 0, 1, 0);
   translate(50, 50);
   rotateX(PI / 3);
   fill(200, 200, 200, 150);
@@ -55,20 +66,24 @@ function draw() {
   for (var y = 0; y < rows - 1; y++) {
     beginShape(TRIANGLE_STRIP);
     for (var x = 0; x < cols; x++) {
+      let v = terrain[x][y];
+      v = map(v, -100, 100, 0,255 );
+       fill(v,v+20,v+50,220); //지형 색 바꾸기
       vertex(x * scl, y * scl, terrain[x][y]);
       vertex(x * scl, (y + 1) * scl, terrain[x][y + 1]);
     }
     endShape();
-  
+
     push();
-    translate(width / 2, v);
+    translate(width / 2, height/2);
     rotateZ(frameCount * 0.01);
     torus(80, 20, 64, 64);
-    sphere(50);
+    sphere(v);
     specularMaterial(250);
     pop();
 
     push();
+  
     translate(width / 2+300, height / 2-100);
     rotateX(frameCount * 0.01);
     normalMaterial(255, 0, 0);
@@ -79,10 +94,20 @@ function draw() {
     push();
     translate(width / 2+600, height / 2-100);
     rotateY(frameCount * 0.01);
-
     torus(80, 20, 64, 64);
     sphere(50);
     ambientMaterial(190);
     pop();
+    
+    
   }
+  
+  fill(67,183,255);
+translate(w/2,h/2);
+translate(mouseX-width/2, (mouseY-height/2)*3);
+rotateX(PI/6);
+rotateY(PI/3);
+sphere(70); // 마우스에 따라 움직이는 공 생성 
+
+
 }
