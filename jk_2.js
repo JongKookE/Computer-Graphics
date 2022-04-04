@@ -23,7 +23,7 @@ function setup() {
   for (var x = 0; x < cols; x++) {
     terrain[x] = [];
     for (var y = 0; y < rows; y++) {
-      terrain[x][y] = 0; //specify a default value for now
+      terrain[x][y] = 0;
     }
   }
 }
@@ -46,7 +46,7 @@ function draw() {
   pointLight(255, 0, 0, 0, -50, 50);
   specularColor(0, 120, 0);
   pointLight(0, 255, 0, 0, 50, 50);
-  specularMaterial(100);  //specularColor 
+  specularMaterial(100);  
 
   flying -= 0.01;
   var yoff = flying;
