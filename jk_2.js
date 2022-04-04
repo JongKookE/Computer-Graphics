@@ -36,8 +36,16 @@ function draw() {
 
   ambientLight(60, 60, 60);
   pointLight(255, 255, 255, locX, locY, 100);
+  
+  shininess(10);  
+  ambientLight(20);
+  specularColor(120, 0, 0);
+  pointLight(255, 0, 0, 0, -50, 50);
+  specularColor(0, 120, 0);
+  pointLight(0, 255, 0, 0, 50, 50);
+  specularMaterial(100);  //specularColor 
 
-  flying -= 0.1;
+  flying -= 0.01;
   var yoff = flying;
   for (var y = 0; y < rows; y++) {
     var xoff = 0;
@@ -87,8 +95,10 @@ function draw() {
     translate(width / 2+600, height / 2-100);
     rotateY(frameCount * 0.01);
     torus(80, 20, 64, 64);
-    sphere(50);
-    ambientMaterial(vvv);
+    sphere(vvv);
+    ambientMaterial();
     pop();
+    
+    
   }
 }
