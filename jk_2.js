@@ -96,9 +96,16 @@ function draw() {
     rotateY(frameCount * 0.01);
     torus(80, 20, 64, 64);
     sphere(vvv);
-    ambientMaterial();
+    ambientMaterial(50);
     pop();
     
-    
+    push();
+     fill(67,183,255);
+translate(w/2,h/2);
+translate(mouseX-width/2, (mouseY-height/2)*3);
+rotateX(PI/6);
+rotateY(PI/3);
+sphere(70);
+  pop();
   }
 }
