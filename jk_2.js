@@ -13,6 +13,8 @@ var terrain = [];
 
 function setup() {
   s = createSlider(0,255,127);
+   ss = createSlider(0,255,127);
+    sss = createSlider(0,255,127);
   createCanvas(600, 600, WEBGL);
   cols = w / scl;
   rows = h / scl;
@@ -27,6 +29,8 @@ function setup() {
 
 function draw() {
   let v = s.value();
+  let vv = ss.value();
+    let vvv = sss.value();
   let locX = mouseX - height / 2;
   let locY = mouseY - width / 2;
 
@@ -76,7 +80,7 @@ function draw() {
     rotateX(frameCount * 0.01);
     normalMaterial(255, 0, 0);
     torus(80, 20, 64, 64);
-    sphere(50);
+    sphere(vv);
     pop();
 
     push();
@@ -84,7 +88,7 @@ function draw() {
     rotateY(frameCount * 0.01);
     torus(80, 20, 64, 64);
     sphere(50);
-    ambientMaterial(190);
+    ambientMaterial(vvv);
     pop();
   }
 }
