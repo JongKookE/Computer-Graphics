@@ -12,6 +12,7 @@ var flying = 0;
 var terrain = [];
 
 function setup() {
+  // 슬라이드 생성
   s = createSlider(0,255,127);
    ss = createSlider(0,255,127);
     sss = createSlider(0,255,127);
@@ -28,12 +29,14 @@ function setup() {
 }
 
 function draw() {
+  // v라는 변수안에 슬라이드 값을 추가.
   let v = s.value();
   let vv = ss.value();
     let vvv = sss.value();
   let locX = mouseX - height / 2;
   let locY = mouseY - width / 2;
 
+  // 다양한 lights 함수 추가
   ambientLight(60, 60, 60);
   pointLight(255, 255, 255, locX, locY, 100);
   
@@ -60,6 +63,7 @@ function draw() {
   lights();
   var x = map(mouseX, 0, width, -100, 100);
   var y = map(mouseY, 0, height, -100, 100);
+  //카메라에 다양한 인수 추가
   camera(0, 0, 400, x, y, 0, 0, 1, 0);
   translate(50, 50);
   rotateX(PI / 3);
@@ -75,6 +79,8 @@ function draw() {
     }
     endShape();
  
+    // material 함수를 3개의 구체로 표현
+    // sphere의 크기를 v값으로 받아서 슬라이드 조절에 따라서 sphere 크기 조절
     push();
     translate(width / 2, height/2);
     rotateZ(frameCount * 0.01);
@@ -99,13 +105,14 @@ function draw() {
     ambientMaterial(50);
     pop();
     
+    // push, pop
     push();
-     fill(67,183,255);
-translate(w/2,h/2);
-translate(mouseX-width/2, (mouseY-height/2)*3);
-rotateX(PI/6);
-rotateY(PI/3);
-sphere(70);
-  pop();
+    fill(67,183,255);
+    translate(w/2,h/2);
+    translate(mouseX-width/2, (mouseY-height/2)*3);
+    rotateX(PI/6);
+    rotateY(PI/3);
+    sphere(70);
+    pop();
   }
 }
